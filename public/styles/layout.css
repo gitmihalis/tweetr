@@ -30,6 +30,8 @@ It should have a white background so that users can clearly separate the content
  */
  main {
    width: 450px;
-   margin: 120px auto auto auto;
+   padding-top: 140px;
+   margin: auto;
    background-color: #fff;
+   height: 100vh;
  }
