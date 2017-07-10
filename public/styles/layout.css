@@ -18,8 +18,18 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
+  font-family: 'Zilla Slab', serif;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
+ It should be only 450px wide
+It should be center aligned to the body
+It should have a white background so that users can clearly separate the content space from the "gutter" or "curtains" of the page.
+ 
  */
+ main {
+   width: 450px;
+   margin: 120px auto auto auto;
+   background-color: #fff;
+ }
