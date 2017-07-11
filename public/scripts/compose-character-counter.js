@@ -6,7 +6,9 @@ $(document).ready(function() {
     const characterLimit = 140;
     const characterCount = characterLimit - $(this).val().length;
     const $counter = $(this).siblings('.counter');
+
     $counter.text(characterCount);
+    // Change the counter color to red when invalid.
     if (characterCount < 0) {
       $counter.css({ color: 'darkred'});
     } else {
