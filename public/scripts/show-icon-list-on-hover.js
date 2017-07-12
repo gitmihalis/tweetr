@@ -1,14 +1,15 @@
 $(document).ready(function() {
+  
   console.log('^=show-icon-list-on-hover.js loaded!')
-  const $tweet = $('article.tweet');
+  const $tweetContainer = $('#tweets');
 
-  $tweet.on('mouseenter', function(event) {
+  $tweetContainer.on('mouseenter', ".tweet", function(event) {
     // when we mouse over the tweet, we want to change the css opacity prop of .icon-list
-    $(this).find('ul.icon-list').css({ opacity: 1 });
+    $(this).find('ul.icon-list').removeClass('hidden'); 
   });
 
-  $tweet.on('mouseleave', function(event) {
-    $(this).find('ul.icon-list').css({ opacity: 0 });
+  $tweetContainer.on('mouseleave', function(event) {
+    $(this).find('ul.icon-list').addClass('hidden');
   });
 
 })

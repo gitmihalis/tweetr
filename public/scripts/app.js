@@ -75,7 +75,7 @@ const createTweetElement = (tweet) => {
           </div>
           <footer>
             ${parseDate(tweet.created_at)} days ago
-            <ul class="icon-list">
+            <ul class="icon-list hidden">
               <li><img src="/images/filled_flag.png" alt="flag"></li>
               <li><img src="/images/repeat.png" alt="repeat"></li>
               <li><img src="/images/filled_like.png" alt="like"></li>
@@ -85,13 +85,14 @@ const createTweetElement = (tweet) => {
   const $tweet = $('<article>').addClass('tweet').html(template);
   return $tweet; 
 }
+
 // function renderTweets
 const renderTweets = (tweets) => {
   // loops through tweets
   // const renderedTweets;
   tweets.forEach( tweet => {
     // calls createTweetElement for each tweet
-    $('#tweets').append( createTweetElement(tweet) );  
+    $('#tweets').prepend( createTweetElement(tweet) );  
   });
   return renderTweets;
 }
@@ -100,16 +101,12 @@ const loadTweets = () => {
   console.log('loading tweets...')
   $.get('/tweets').done(function(data) {
     // populate page with tweets
+    $('#tweets').empty();
     renderTweets(data);
   }).fail(function(err) {
     console.error('Could not get tweets :', err);
   });
 }
-
-// const isValid = ($field) => {
-
-// }
-
 
 $(function() { // =============  On document ready   ==============
   $('.new-tweet form').on('submit', function(e) {
@@ -135,6 +132,8 @@ $(function() { // =============  On document ready   ==============
       $.post('/tweets', $this.serialize() )
         .done(function() {
           $this.children('textarea').val("");
+          loadTweets();
+          // append 
         });
     }
   })
