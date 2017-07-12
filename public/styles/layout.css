@@ -35,3 +35,7 @@ It should have a white background so that users can clearly separate the content
    background-color: #fff;
    height: 100%;
  }
+
+ .pull-right {
+   float: right;
+ }
