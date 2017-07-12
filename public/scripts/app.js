@@ -108,6 +108,25 @@ const loadTweets = () => {
 
 // This is run after page is loaded.
 $(function() {
+  $('.new-tweet form').on('submit', function(e) {
+    const $this = $(this);
+    const $textarea = $this.children('textarea');
+    e.preventDefault();
+    // Validate form fields are filled 
+    if ($textarea.val() === null || 
+        $textarea.val() === "") {
+          $this.closest('main.container')
+            .prepend(`<div class="flash flash-warn">You forgot to type something.</div>`)
+            .serialize();
+    } 
+    if ($textarea) {
+      
+    }
+    $.post('/tweets', $this.serialize() )
+      .done(function() {
+        $this.children('textarea').val("");
+      });
+  })
   // renderTweets(data);
   loadTweets();
 });
