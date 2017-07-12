@@ -106,27 +106,38 @@ const loadTweets = () => {
   });
 }
 
-// This is run after page is loaded.
-$(function() {
+// const isValid = ($field) => {
+
+// }
+
+
+$(function() { // =============  On document ready   ==============
   $('.new-tweet form').on('submit', function(e) {
     const $this = $(this);
     const $textarea = $this.children('textarea');
+    
     e.preventDefault();
-    // Validate form fields are filled 
+    // Remove the previous flash message if present on page.
+    $('#flash-message').remove();
+    // Validate tweet before we submit
     if ($textarea.val() === null || 
         $textarea.val() === "") {
           $this.closest('main.container')
-            .prepend(`<div class="flash flash-warn">You forgot to type something.</div>`)
-            .serialize();
-    } 
-    if ($textarea) {
-      
+            .prepend(`<div id="flash-message" class="warning"> 
+                        Please fill in your message. 
+                     </div>`);
+    } else if ( $textarea.val().length > 140 ) {
+        $this.closest('main.container')
+          .prepend(`<div id="flash-message" class="warning"> 
+                      Your tweet is too long.
+                    </div>`);
+    } else {
+      $.post('/tweets', $this.serialize() )
+        .done(function() {
+          $this.children('textarea').val("");
+        });
     }
-    $.post('/tweets', $this.serialize() )
-      .done(function() {
-        $this.children('textarea').val("");
-      });
   })
-  // renderTweets(data);
+
   loadTweets();
 });

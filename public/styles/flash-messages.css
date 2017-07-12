@@ -1,0 +1,18 @@
+#flash-message {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  margin:  auto;
+  padding: 1.55em 1em;
+  border-radius: 5px;
+  vertical-align: center;
+  width: 300px;
+  height: 70px;
+  border: 1px solid #333;
+}
+
+.warning {
+  background-color: darkred;
+  color: white;
+}
