@@ -21,7 +21,7 @@ var data = [
     "content": {
       "text": "If I have seen further it is by standing on the shoulders of giants"
     },
-    "created_at": 1461116232227
+    "created_at": 1491116232227
   },
   {
     "user": {
@@ -35,7 +35,7 @@ var data = [
     "content": {
       "text": "Je pense , donc je suis"
     },
-    "created_at": 1461113959088
+    "created_at": 1499113959088
   },
   {
     "user": {
@@ -48,24 +48,35 @@ var data = [
       "handle": "@johann49"
     },
     "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
+      "text": "Es ist nichts <script>alert('dieshen')</script>schrecklicher als eine tätige Unwissenheit."
     },
-    "created_at": 1461113796368
+    "created_at": 1499613796368
   }
 ];
+
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+function parseDate(milliseconds) {
+  let date = new Date( Date.now() - milliseconds);
+  return Math.floor(date / 1000 / 60 / 60 / 24).toString();
+}
 
 const createTweetElement = (tweet) => {
   const template = `
           <header>
             <img src="${tweet.user.avatars.small}" alt="default avatar">
-            <h3>${tweet.user.name}</h3>
-            <span>${tweet.user.handle}</span>
+            <h3>${escape(tweet.user.name)}</h3>
+            <span>${escape(tweet.user.handle)}</span>
           </header>
           <div class="content">
-            ${tweet.content.text}
+            ${escape(tweet.content.text)}
           </div>
           <footer>
-            ${tweet.created_at} days ago
+            ${parseDate(tweet.created_at)} days ago
             <ul class="icon-list">
               <li><img src="/images/filled_flag.png" alt="flag"></li>
               <li><img src="/images/repeat.png" alt="repeat"></li>
