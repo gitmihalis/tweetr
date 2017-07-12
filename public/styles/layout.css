@@ -33,5 +33,5 @@ It should have a white background so that users can clearly separate the content
    padding-top: 140px;
    margin: auto;
    background-color: #fff;
-   height: 100vh;
+   height: 100%;
  }
