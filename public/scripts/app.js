@@ -5,8 +5,6 @@
  */
 
 // Test / driver code (temporary). Eventually will get this from the server.
-
-
 var data = [
   {
     "user": {
@@ -54,13 +52,13 @@ var data = [
   }
 ];
 
-function escape(str) {
+const escape = (str) => {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-function parseDate(milliseconds) {
+const parseDate = (milliseconds) => {
   let date = new Date( Date.now() - milliseconds);
   return Math.floor(date / 1000 / 60 / 60 / 24).toString();
 }
@@ -90,6 +88,7 @@ const createTweetElement = (tweet) => {
 // function renderTweets
 const renderTweets = (tweets) => {
   // loops through tweets
+  // const renderedTweets;
   tweets.forEach( tweet => {
     // calls createTweetElement for each tweet
     $('#tweets').append( createTweetElement(tweet) );  
@@ -97,7 +96,18 @@ const renderTweets = (tweets) => {
   return renderTweets;
 }
 
+const loadTweets = () => {
+  console.log('loading tweets...')
+  $.get('/tweets').done(function(data) {
+    // populate page with tweets
+    renderTweets(data);
+  }).fail(function(err) {
+    console.error('Could not get tweets :', err);
+  });
+}
 
+// This is run after page is loaded.
 $(function() {
-  renderTweets(data);
+  // renderTweets(data);
+  loadTweets();
 });
