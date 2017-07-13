@@ -4,13 +4,14 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+// Escape non-alphanumeric characters
 const escape = (str) => {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-const parseDate = (milliseconds) => {
+const timeago = (milliseconds) => {
   const age = Date.now() - milliseconds;
   const aYear = 1000 * 60 * 60 * 24 * 365;
   const aWeek = 1000 * 60 * 60 * 24 * 7;
@@ -19,22 +20,22 @@ const parseDate = (milliseconds) => {
   const aMinute = 1000 * 60;
   if ( age < 1000 ) return 'a second ago';
   if ( age > 1000 && age < aMinute  ) {
-    return `${Math.floor(age / 1000 ).toString()} seconds ago`;
+    return `${Math.ceil(age / 1000 ).toString()} seconds ago`;
   }
   if ( age > aMinute && age < anHour ) {
-    return `${Math.floor(age / 1000 / 60 ).toString()} minutes ago`;
+    return `${Math.ceil(age / 1000 / 60 ).toString()} minutes ago`;
   }
   if ( age > anHour && age < aDay ) {
-    return `${Math.floor(age / 1000 / 60 / 60).toString()} hours ago`;
+    return `${Math.ceil(age / 1000 / 60 / 60).toString()} hours ago`;
   }
   if ( age > aDay && age < aWeek ) {
-    return `${Math.floor(age / 1000 / 60 / 60 / 24).toString()} days ago`;
+    return `${Math.ceil( age / 1000 / 60 / 60 / 24 ).toString()} days ago`;
   }
   if (age > aWeek && age < aYear) {
-    return `${Math.floor(age / 1000 / 60 / 60 / 24 / 7).toString()} weeks ago`;
+    return `${Math.ceil(age / 1000 / 60 / 60 / 24 / 7).toString()} weeks ago`;
   }
   if ( age > aYear ) {
-    return `${Math.floor(age / 1000 / 60 / 60 / 24 / 365).toString()} years ago`;
+    return `${Math.ceil(age / 1000 / 60 / 60 / 24 / 365).toString()} years ago`;
   }
   return 'Sometime ago'
 }
@@ -50,7 +51,7 @@ const createTweetElement = (tweet) => {
             ${escape(tweet.content.text)}
           </div>
           <footer>
-            ${parseDate(tweet.created_at)}
+            ${timeago(tweet.created_at)}
             <ul class="icon-list hidden">
               <li><img src="/images/filled_flag.png" alt="flag"></li>
               <li><img src="/images/repeat.png" alt="repeat"></li>
@@ -81,7 +82,8 @@ const loadTweets = () => {
   });
 }
 
-$(function() { // =============  On document ready   ==============
+// ========== On document ready   =============
+$(function() { 
   $('.new-tweet form').on('submit', function(e) {
     const $this = $(this);
     const $textarea = $this.children('textarea');
