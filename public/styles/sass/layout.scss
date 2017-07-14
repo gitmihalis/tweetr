@@ -1,0 +1,40 @@
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+/*
+ * Global layout stuff
+ */
+
+body {
+  margin: 0;
+  color: #244751;
+  background-color: #eee;
+  font-family: 'Roboto', sans-serif;
+}
+
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ It should be only 450px wide
+It should be center aligned to the body
+It should have a white background so that users can clearly separate the content space from the "gutter" or "curtains" of the page.
+ 
+ */
+ main {
+   width: 450px;
+   padding-top: 170px;
+   margin: auto;
+   background-color: #fff;
+   height: 100%;
+ }
+
+ .pull-right {
+   float: right;
+ }

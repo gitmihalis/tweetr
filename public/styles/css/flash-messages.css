@@ -1,0 +1,19 @@
+#flash-message {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 1.55em 1em;
+  border-radius: 5px;
+  vertical-align: center;
+  width: 386px;
+  height: 70px;
+  box-shadow: 0 0 19px -2px #aaa; }
+
+.warning {
+  background-color: lightcoral;
+  color: white;
+  font-weight: 700; }
+
+/*# sourceMappingURL=flash-messages.css.map */
