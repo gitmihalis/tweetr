@@ -9,18 +9,19 @@ module.exports = function makeDataHelpers(db) {
       db.collection('tweets').insertOne(newTweet);
       callback(null, true);
     },
+    
+    // Saves a like to `db`
+    saveLike: function(like, callback) {
+      db.collection('likes').insertOne(like);
+      callback(null, true);
+    },
 
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       const sortNewestFirst = (a, b) => a.created_at - b.created_at;
       db.collection('tweets').find({}).toArray(callback);
       //callback(null, db.tweets.sort(sortNewestFirst));
-      db.collection.
     },
-
-    saveLike: function(id, callback) {
-      // db.collection('tweets').updateOne({ _id: })
-    }
 
   };
 }

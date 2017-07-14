@@ -41,13 +41,20 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/tweets/:id", function(req, res) {
-    const tweet_id = req.params.id;
-    DataHelpers.saveLike(tweet_id, (err) => {
+  tweetsRoutes.post("/likes", function(req, res) {
+    if (!req.body.entity_id) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+
+    const like = { admirer: "someUserId000", entity_id: req.body.entity_id };
+
+    DataHelpers.saveLike(like, (err) => {
       if (err) {
-        throw err;
-      }
+        res.status(500).json({ error: err.message });
+      } else {
       res.status(201).send();
+      }
     })
   })
 
