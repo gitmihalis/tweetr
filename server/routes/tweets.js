@@ -1,7 +1,6 @@
 "use strict";
 
 const userHelper    = require("../lib/util/user-helper")
-
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
@@ -47,7 +46,7 @@ module.exports = function(DataHelpers) {
       return;
     }
 
-    const like = { admirer: "someUserId000", entity_id: req.body.entity_id };
+    const like = { admirer: "someUser000", entity_id: req.body.entity_id };
 
     DataHelpers.saveLike(like, (err) => {
       if (err) {

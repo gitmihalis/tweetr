@@ -1,5 +1,5 @@
 "use strict";
-
+const mongo = require('mongodb');
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers(db) {
   return {
@@ -12,7 +12,11 @@ module.exports = function makeDataHelpers(db) {
     
     // Saves a like to `db`
     saveLike: function(like, callback) {
-      db.collection('likes').insertOne(like);
+      console.log(like)
+      db.collection('tweets').findOneAndUpdate({_id: mongo.ObjectID(like.entity_id)},{ 
+        $set: { liked_by: { [like.admirer]: Date.now() } },
+        $inc: { likes: +1 } }
+      );
       callback(null, true);
     },
 
@@ -20,7 +24,6 @@ module.exports = function makeDataHelpers(db) {
     getTweets: function(callback) {
       const sortNewestFirst = (a, b) => a.created_at - b.created_at;
       db.collection('tweets').find({}).toArray(callback);
-      //callback(null, db.tweets.sort(sortNewestFirst));
     },
 
   };
