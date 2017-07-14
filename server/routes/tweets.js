@@ -46,9 +46,9 @@ module.exports = function(DataHelpers) {
       return;
     }
 
-    const like = { admirer: "someUser000", entity_id: req.body.entity_id };
+    const like = { admirer: "someUser000", entity_id: req.body.entity_id, is_liked: req.body.is_liked };
 
-    DataHelpers.saveLike(like, (err) => {
+    DataHelpers.setLike(like, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {

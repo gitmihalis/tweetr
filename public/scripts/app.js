@@ -62,7 +62,7 @@ const createTweetElement = (tweet) => {
             </ul>
           </footer>
         </article>`;
-  const $tweet = $(`<article id="${tweet._id}">`).addClass('tweet').html(template);
+  const $tweet = $(`<article id="${tweet._id}" data-liked >`).addClass('tweet').html(template);
   return $tweet; 
 }
 

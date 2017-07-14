@@ -10,12 +10,21 @@ module.exports = function makeDataHelpers(db) {
       callback(null, true);
     },
     
-    // Saves a like to `db`
-    saveLike: function(like, callback) {
-      db.collection('tweets').findOneAndUpdate({_id: mongo.ObjectID(like.entity_id)},{ 
-        $set: { liked_by: { [like.admirer]: Date.now() } },
-        $inc: { likes: +1 } }
-      );
+    // Sets a like field on a `tweet`
+    setLike: function(like, callback) {
+      // query the tweets for the like.
+      console.log('setLike --> like in as :', typeof like.is_liked)
+      if (like.is_liked === "false") {
+        db.collection('tweets').findOneAndUpdate( { _id: mongo.ObjectID(like.entity_id) }, { 
+          $set: { liked_by: { [like.admirer]: Date.now() } } 
+        });
+      } else {
+        db.collection('tweets').findOneAndUpdate( {_id: mongo.ObjectID(like.entity_id) }, { 
+          $unset: { liked_by: { [like.admirer]: "" } } 
+        });
+      }
+      
+      console.log('like toggled')
       callback(null, true);
     },
 
