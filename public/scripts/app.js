@@ -18,9 +18,8 @@ const timeago = (milliseconds) => {
   const aDay = 1000 * 60 * 60 * 24 * 365;
   const anHour = 1000 * 60 * 60;
   const aMinute = 1000 * 60;
-  if ( age < 1000 ) return 'a second ago';
-  if ( age > 1000 && age < aMinute  ) {
-    return `${Math.ceil(age / 1000 ).toString()} seconds ago`;
+  if ( age < aMinute  ) {
+    return `seconds ago`;
   }
   if ( age > aMinute && age < anHour ) {
     return `${Math.ceil(age / 1000 / 60 ).toString()} minutes ago`;
@@ -53,13 +52,13 @@ const createTweetElement = (tweet) => {
           <footer>
             ${timeago(tweet.created_at)}
             <ul class="icon-list hidden">
-              <li><img src="/images/filled_flag.png" alt="flag"></li>
-              <li><img src="/images/repeat.png" alt="repeat"></li>
-              <li><img src="/images/filled_like.png" alt="like"></li>
+              <li><i>⚑</i></li>
+              <li><i>↻</i></li>
+              <li><i class="like">${tweet.liked ? '♥︎' : '♡'}</i></li>
             </ul>
           </footer>
         </article>`;
-  const $tweet = $('<article>').addClass('tweet').html(template);
+  const $tweet = $(`<article id="${tweet._id}">`).addClass('tweet').html(template);
   return $tweet; 
 }
 
@@ -72,7 +71,6 @@ const renderTweets = (tweets) => {
 }
 
 const loadTweets = () => {
-  console.log('loading tweets...')
   $.get('/tweets').done(function(data) {
     // populate page with tweets
     $('#tweets').empty();
@@ -83,7 +81,8 @@ const loadTweets = () => {
 }
 
 // ========== On document ready   =============
-$(function() { 
+$(document).ready( function(){ 
+
   $('.new-tweet form').on('submit', function(e) {
     const $this = $(this);
     const $textarea = $this.children('textarea');
@@ -113,5 +112,5 @@ $(function() {
     }
   })
 
-  loadTweets();
+  loadTweets(); // Load tweets after the page is loaded.
 });

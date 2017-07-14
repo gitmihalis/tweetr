@@ -15,6 +15,11 @@ module.exports = function makeDataHelpers(db) {
       const sortNewestFirst = (a, b) => a.created_at - b.created_at;
       db.collection('tweets').find({}).toArray(callback);
       //callback(null, db.tweets.sort(sortNewestFirst));
+      db.collection.
+    },
+
+    saveLike: function(id, callback) {
+      // db.collection('tweets').updateOne({ _id: })
     }
 
   };
