@@ -63,3 +63,8 @@ ul.icon-list {
 .icon-list i {
   cursor: pointer;
 }
+
+.icon-list span {
+  padding: 0 0 0 .1em;
+  margin: 0
+}

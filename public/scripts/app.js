@@ -54,7 +54,7 @@ const createTweetElement = (tweet) => {
             <ul class="icon-list hidden">
               <li><i>⚑</i></li>
               <li><i>↻</i></li>
-              <li><i class="like">${tweet.liked ? '♥︎' : '♡'}</i></li>
+              <li><i class="like">♡</i><span class="like-counter">${tweet.likes}</span></li>
             </ul>
           </footer>
         </article>`;
