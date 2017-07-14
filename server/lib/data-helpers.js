@@ -12,7 +12,6 @@ module.exports = function makeDataHelpers(db) {
     
     // Saves a like to `db`
     saveLike: function(like, callback) {
-      console.log(like)
       db.collection('tweets').findOneAndUpdate({_id: mongo.ObjectID(like.entity_id)},{ 
         $set: { liked_by: { [like.admirer]: Date.now() } },
         $inc: { likes: +1 } }
