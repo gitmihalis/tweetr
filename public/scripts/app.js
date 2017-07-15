@@ -57,16 +57,20 @@ const createTweetElement = (tweet) => {
             <ul class="icon-list hidden">
               <li><i>⚑</i></li>
               <li><i>↻</i></li>
-              <li><i class="like">♡</i>
-                <span class="like-counter">
-                  ${likeCount}
-                </span>
+              <li class="like"><i>♡</i></li>
+              <li class="like-counter">
+                  ${ likeCount }
               </li>
             </ul>
           </footer>
         </article>`;
   const $tweet = $(`<article data-id="${tweet._id}">`)
     .addClass('tweet').html(template);
+  // A hack for evaluating whether | not tweet was already
+  //  liked by the current user.
+  if (likeCount) {
+    $tweet.data('liked', true);
+  }
   return $tweet; 
 }
 

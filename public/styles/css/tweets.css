@@ -29,17 +29,20 @@
     font-size: 1.5em;
     margin: 0; }
   .tweet footer {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
     padding: .5em; }
     .tweet footer ul.icon-list {
       list-style: none;
       float: right;
-      margin: 0;
-      padding: 0;
+      margin: 2px;
+      padding: 1px 5px;
       opacity: 0; }
       .tweet footer ul.icon-list li {
         display: inline; }
-      .tweet footer ul.icon-list span {
-        padding-left: .05em; }
       .tweet footer ul.icon-list i {
         cursor: pointer; }
 

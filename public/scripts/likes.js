@@ -14,16 +14,18 @@ $(document).ready(function() {
         // Set whether||not tweet is liked after db is updated
         let counter = $this.siblings('.like-counter').text();
         counter = Number(counter);
+        // This is a hack until users are implemented
+        // As of now there is only one randomUser000 user.
         if (!isLiked) {
-          $this.text('♥︎')
-            .siblings('.like-counter')
-              .text(counter + 1);
-          $this.closest("article.tweet").data('liked', true);
+          $this.siblings('.like-counter')
+            .text(counter + 1);
+          $this.closest("article.tweet")
+            .data('liked', true);
         } else {
-          $this.text('♡')
-            .siblings('.like-counter')
-              .text(counter - 1);
-          $this.closest("article.tweet").data('liked', false);
+          $this.siblings('.like-counter')
+            .text(counter - 1);
+          $this.closest("article.tweet")
+            .data('liked', false);
         }
       })
       .fail(function(err) {
