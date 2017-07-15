@@ -6,7 +6,6 @@ $(document).ready(function() {
     const entityId = $this.closest("article.tweet").data('id');
     // Store whether||not tweet is already liked
     const isLiked = $this.closest("article.tweet").data('liked') || false;
-
     $.ajax({
       url: `/tweets/${entityId}/likes`,
       data: { is_liked: isLiked },

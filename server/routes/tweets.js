@@ -46,7 +46,7 @@ module.exports = function(DataHelpers) {
       return;
     }
 
-    const like = { admirer: "someUser000", entity_id: req.params.entity_id, is_liked: req.body.is_liked };
+    const like = { admirer: "someUser000", entity_id: req.params.tweet, is_liked: req.body.is_liked };
 
     DataHelpers.setLike(like, (err) => {
       if (err) {

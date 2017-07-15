@@ -17,13 +17,13 @@ module.exports = function makeDataHelpers(db) {
         db.collection('tweets').findOneAndUpdate( { _id: mongo.ObjectID(like.entity_id) }, { 
           $set: { liked_by: { [like.admirer]: Date.now() } } 
         });
+        console.log('tweet/likes was set')
       } else {
         db.collection('tweets').findOneAndUpdate( {_id: mongo.ObjectID(like.entity_id) }, { 
           $unset: { liked_by: { [like.admirer]: "" } } 
         });
+      console.log('tweet/likes was unset')
       }
-      
-      console.log('like toggled')
       callback(null, true);
     },
 
