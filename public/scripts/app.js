@@ -11,8 +11,6 @@ const escape = (str) => {
   return div.innerHTML;
 }
 
-const currentUser = '';
-
 const timeago = (milliseconds) => {
   const age = Date.now() - milliseconds;
   const aYear = 1000 * 60 * 60 * 24 * 365;
@@ -66,7 +64,7 @@ const createTweetElement = (tweet) => {
         </article>`;
   const $tweet = $(`<article data-id="${tweet._id}">`)
     .addClass('tweet').html(template);
-  // A hack for evaluating whether | not tweet was already
+  // A hack for evaluating whether or not tweet was already
   //  liked by the current user.
   if (likeCount) {
     $tweet.data('liked', true);
@@ -84,7 +82,8 @@ const renderTweets = (tweets) => {
 
 const loadTweets = () => {
   $.get('/tweets').done(function(data) {
-    // populate page with tweets
+    // Populate the tweets container after tweets are
+    // retrieved from `db`
     $('#tweets').empty();
     renderTweets(data);
   }).fail(function(err) {
@@ -100,9 +99,9 @@ $(document).ready( function(){
     const $textarea = $this.children('textarea');
     
     e.preventDefault();
-    // Remove the previous flash message if present on page.
+    // Remove the previous flash message if it's present on page
     $('#flash-message').remove();
-    // Validate tweet before we submit
+    // Validate the new tweet before submiting
     if ($textarea.val() === null || 
         $textarea.val() === "") {
           $this.closest('main.container')
@@ -124,5 +123,5 @@ $(document).ready( function(){
     }
   })
 
-  loadTweets(); // Load tweets after the page is loaded.
+  loadTweets(); 
 });
