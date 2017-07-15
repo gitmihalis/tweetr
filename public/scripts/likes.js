@@ -8,8 +8,8 @@ $(document).ready(function() {
     const isLiked = $this.closest("article.tweet").data('liked') || false;
 
     $.ajax({
-      url: '/tweets/likes',
-      data: { entity_id: entityId, is_liked: isLiked },
+      url: `/tweets/${entityId}/likes`,
+      data: { is_liked: isLiked },
       method: "PUT"})
       .done(function() {
         // Set whether||not tweet is liked after db is updated
