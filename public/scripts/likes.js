@@ -3,24 +3,29 @@ $(document).ready(function() {
 
   $("#tweets").on('click', '.icon-list .like', function(event) {
     const $this = $(this);
-    const entityId = $this.closest("article.tweet").attr('id');
+    const entityId = $this.closest("article.tweet").data('id');
     // Store whether||not tweet is already liked
     const isLiked = $this.closest("article.tweet").data('liked') || false;
 
-    $.post('/tweets/likes', { entity_id: entityId, is_liked: isLiked })
+    $.ajax({
+      url: '/tweets/likes',
+      data: { entity_id: entityId, is_liked: isLiked },
+      method: "PUT"})
       .done(function() {
-        // Set whether||not tweet is liked
+        // Set whether||not tweet is liked after db is updated
+        let counter = $this.siblings('.like-counter').text();
+        counter = Number(counter);
         if (!isLiked) {
+          $this.text('♥︎')
+            .siblings('.like-counter')
+              .text(counter + 1);
           $this.closest("article.tweet").data('liked', true);
-          console.log($this.closest("article.tweet").data());
         } else {
+          $this.text('♡')
+            .siblings('.like-counter')
+              .text(counter - 1);
           $this.closest("article.tweet").data('liked', false);
-          console.log($this.closest("article.tweet").data());
         }
-        const counter = Number($this.siblings('.like-counter').text());
-        $this.text('♥︎')
-          .siblings('.like-counter')
-            .text(counter + 1 );
       })
       .fail(function(err) {
         console.error('Error: Could not like that tweet.');

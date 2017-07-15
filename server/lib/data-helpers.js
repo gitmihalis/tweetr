@@ -12,8 +12,7 @@ module.exports = function makeDataHelpers(db) {
     
     // Sets a like field on a `tweet`
     setLike: function(like, callback) {
-      // query the tweets for the like.
-      console.log('setLike --> like in as :', typeof like.is_liked)
+      // query the tweets for the like and add | remove like
       if (like.is_liked === "false") {
         db.collection('tweets').findOneAndUpdate( { _id: mongo.ObjectID(like.entity_id) }, { 
           $set: { liked_by: { [like.admirer]: Date.now() } } 

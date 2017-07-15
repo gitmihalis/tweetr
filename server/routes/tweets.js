@@ -40,7 +40,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/likes", function(req, res) {
+  tweetsRoutes.put("/likes", function(req, res) {
     if (!req.body.entity_id) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;

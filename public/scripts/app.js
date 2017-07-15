@@ -11,6 +11,8 @@ const escape = (str) => {
   return div.innerHTML;
 }
 
+const currentUser = '';
+
 const timeago = (milliseconds) => {
   const age = Date.now() - milliseconds;
   const aYear = 1000 * 60 * 60 * 24 * 365;
@@ -40,6 +42,7 @@ const timeago = (milliseconds) => {
 }
 
 const createTweetElement = (tweet) => {
+  const likeCount = tweet.liked_by ? Object.keys(tweet.liked_by).length : 0;
   const template = `
           <header>
             <img src="${tweet.user.avatars.small}" alt="default avatar">
@@ -56,13 +59,14 @@ const createTweetElement = (tweet) => {
               <li><i>↻</i></li>
               <li><i class="like">♡</i>
                 <span class="like-counter">
-                  ${tweet.likes ? tweet.likes : ''}
+                  ${likeCount}
                 </span>
               </li>
             </ul>
           </footer>
         </article>`;
-  const $tweet = $(`<article id="${tweet._id}" data-liked >`).addClass('tweet').html(template);
+  const $tweet = $(`<article data-id="${tweet._id}">`)
+    .addClass('tweet').html(template);
   return $tweet; 
 }
 
