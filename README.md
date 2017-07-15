@@ -4,7 +4,13 @@ Tweeter is a simple, single-page Twitter clone.
 
 Click the **compose** button to toggle the new tweet field, input a message and __tweet__ it out to the feed.
 
+
 ![tweets page](https://raw.githubusercontent.com/gitmihalis/tweetr/master/docs/tweets-home.png)
+
+
+Like and unlike a tweet by clicking ♡ and update the like counter.
+
+![likes]()
 
 ## Getting Started
 
